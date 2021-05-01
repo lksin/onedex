@@ -16,6 +16,7 @@
 <html lang="<!--constStr@language-->">
 <head>
     <title><!--Title--></title>
+    <link rel="stylesheet" type="text/css" media="all" href="https://www.bootcss.com/p/buttons/css/buttons.css">
     <meta charset=utf-8>
     <meta http-equiv=X-UA-Compatible content="IE=edge">
     <meta name=viewport content="width=device-width,initial-scale=1">
@@ -24,7 +25,7 @@
     <link rel="icon" href="<!--base_path-->favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="<!--base_path-->favicon.ico" type="image/x-icon">
     <style type="text/css">
-        body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;line-height:1em;color:#000;background-color:#f7f7f9;<!--BackgroundStart-->background-repeat:no-repeat;background-size:cover;background-attachment:fixed;background-image:url("<!--BackgroundUrl-->");<!--BackgroundEnd-->}
+        body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;line-height:1em;color:#000;background-color:#f7f7f9;background-image: url(https://api.haozi.xyz/acg.php);background-repeat: no-repeat;/* background-position: center; */background-size: cover;z-index: 1;background-attachment: fixed;}
         a{color:#24292e;cursor:pointer;text-decoration:none}
         ion-icon{font-size:15px;vertical-align:bottom}
         .changelanguage{position:absolute;right:5px;}
@@ -225,10 +226,10 @@
 <!--ShowThumbnailsStart-->
                             &nbsp;&nbsp;&nbsp;
                             <label><input type="checkbox" id="originalpic"><!--constStr@OriginalPic--></label>
-                            <button onclick="showthumbnails(this);"><!--constStr@ShowThumbnails--></button>
+                            <button class="button button-glow button-rounded button-royal" onclick="showthumbnails(this);"><!--constStr@ShowThumbnails--></button>
 <!--ShowThumbnailsEnd-->
                             &nbsp;
-                            <button onclick="CopyAllDownloadUrl('.download');"><!--constStr@CopyAllDownloadUrl--></button>
+                            <button class="button button-glow button-rounded button-caution" onclick="CopyAllDownloadUrl('.download');"><!--constStr@CopyAllDownloadUrl--></button>
                         </th>
                         <th class="updated_at"><a onclick="sortby('time');"><!--constStr@EditTime--></a></th>
                         <th class="size"><a onclick="sortby('size');"><!--constStr@Size--></a></th>
@@ -311,8 +312,8 @@
                         <option value=""><!--constStr@UploadFile--></option>
                         <option value="1"><!--constStr@UploadFolder--></option>
                     </select>
-                    <input id="upload_file" type="file" name="upload_filename" multiple="multiple">
-                    <input id="upload_submit" onclick="preup();" value="<!--constStr@Upload-->" type="button">
+                    <input class="button button-glow button-border button-rounded button-primary" id="upload_file" type="file" name="upload_filename" multiple="multiple">
+                    <input class="button button-glow button-border button-rounded button-primary" id="upload_submit" onclick="preup();" value="<!--constStr@Upload-->" type="button">
                 </div>
                 </div>
 <!--AdminEnd-->
