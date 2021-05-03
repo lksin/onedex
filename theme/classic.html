@@ -99,7 +99,7 @@
 <!--SelectLanguageStart-->
                 <option value="<!--SelectLanguageKey-->" <!--SelectLanguageSelected-->><!--SelectLanguageValue--></option>
 <!--SelectLanguageEnd-->
-        </getElementById>
+        </select>
     </div>
 <!--NeedUpdateStart-->
     <div style='position:absolute;'><font color='red'><!--constStr@NeedUpdate--></font></div>
@@ -166,7 +166,7 @@
 <!--GuestUploadStart-->
                 <div id="upload_div" style="margin:0 0 16px 0">
                 <div id="upload_btns" align="center">
-                    <select class="button button-glow button-border button-rounded button-primary" onchange="document.getElementById('upload_file').webkitdirectory=this.value;">
+                    <select onchange="document.getElementById('upload_file').webkitdirectory=this.value;">
                         <option value=""><!--constStr@UploadFile--></option>
                         <option value="1"><!--constStr@UploadFolder--></option>
                     </select>
