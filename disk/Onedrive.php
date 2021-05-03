@@ -16,7 +16,7 @@ class Onedrive {
         }
         $this->oauth_url = 'https://login.microsoftonline.com/common/oauth2/v2.0/';
         $this->api_url = 'https://graph.microsoft.com/v1.0';
-        $this->scope = 'https://graph.microsoft.com/Files.ReadWrite.All offline_access';
+        $this->scope = 'https://graph.microsoft.com/Files.ReadWrite.All https://graph.microsoft.com/Sites.ReadWrite.All offline_access';
         $this->client_secret = urlencode($this->client_secret);
         $this->scope = urlencode($this->scope);
         $this->DownurlStrName = '@microsoft.graph.downloadUrl';
@@ -806,8 +806,9 @@ class Onedrive {
             $sharepointname = $tmp[1];
         }
         $tmp = splitlast($tmp[0], '/');
-        if (getConfig('Driver', $this->disktag)=='Onedrive') $url = 'https://graph.microsoft.com/v1.0/sites/root:/' . $tmp[1] . '/' . $sharepointname;
-        if (getConfig('Driver', $this->disktag)=='OnedriveCN') $url = 'https://microsoftgraph.chinacloudapi.cn/v1.0/sites/root:/' . $tmp[1] . '/' . $sharepointname;
+        //if (getConfig('Driver', $this->disktag)=='Onedrive') $url = 'https://graph.microsoft.com/v1.0/sites/root:/' . $tmp[1] . '/' . $sharepointname;
+        //if (getConfig('Driver', $this->disktag)=='OnedriveCN') $url = 'https://microsoftgraph.chinacloudapi.cn/v1.0/sites/root:/' . $tmp[1] . '/' . $sharepointname;
+        $url = $this->api_url . '/sites/root:/' . $tmp[1] . '/' . $sharepointname;
 
         $i=0;
         $response = [];
@@ -884,9 +885,9 @@ class Onedrive {
         }
         if ($fileinfo['size']>10*1024*1024) {
             $cachefilename = spurlencode( $fileinfo['path'] . '/.' . $fileinfo['filelastModified'] . '_' . $fileinfo['size'] . '_' . $fileinfo['name'] . '.tmp', '/');
-            $getoldupinfo=$this->list_files(path_format($path . '/' . $cachefilename));
-            //echo json_encode($getoldupinfo, JSON_PRETTY_PRINT);
-            if (isset($getoldupinfo['file'])&&$getoldupinfo['size']<5120) {
+            $getoldupinfo = $this->list_files(path_format($path . '/' . $cachefilename));
+            //error_log1(json_encode($getoldupinfo, JSON_PRETTY_PRINT));
+            if (isset($getoldupinfo['url'])&&$getoldupinfo['size']<5120) {
                 $getoldupinfo_j = curl('GET', $getoldupinfo['url']);
                 $getoldupinfo = json_decode($getoldupinfo_j['body'], true);
                 if ( json_decode( curl('GET', $getoldupinfo['uploadUrl'])['body'], true)['@odata.context']!='' ) return output($getoldupinfo_j['body'], $getoldupinfo_j['stat']);
@@ -997,10 +998,10 @@ class Onedrive {
             }
         }
         curl_close($ch);
-        error_log1($response['stat'].'
+        /*error_log1($response['stat'].'
     '.$response['body'].'
     '.$url.'
-    ');
+    ');*/
         return $response;
     }
 
